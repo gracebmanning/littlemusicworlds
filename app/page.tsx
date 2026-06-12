@@ -1,3 +1,6 @@
+import { sites } from "@/lib/sampleData";
+import { Grid } from "@/components/grid";
+
 export default function Home() {
     return (
         <div className="flex flex-col flex-1 items-center justify-start px-8 md:px-10 lg:px-20 py-20">
@@ -13,6 +16,7 @@ export default function Home() {
                     Grace Manning
                 </a>
             </h2>
+            <Grid sites={sites} />
         </div>
     );
 }
