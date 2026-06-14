@@ -2,8 +2,7 @@
 import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Site } from "@/lib/sampleData";
-import { slugify } from "@/util/slugify";
+import { Site, sitePath } from "@/lib/siteData";
 import { searchSites } from "@/util/search";
 import GridSearch from "./GridSearch";
 
@@ -31,8 +30,8 @@ export default function Grid({ sites }: { sites: Site[] }) {
                 {filteredSites.length > 0 ? (
                     filteredSites.map((site) => (
                         <Link
-                            key={site.id}
-                            href={`/${slugify(site.artistName)}/${slugify(site.songTitle)}`}
+                            key={sitePath(site)}
+                            href={sitePath(site)}
                             className="flex flex-col justify-center items-center gap-2"
                         >
                             <Image
@@ -42,7 +41,7 @@ export default function Grid({ sites }: { sites: Site[] }) {
                                 height="250"
                                 className="w-full rounded-lg"
                             />
-                            <p>{`"${site.songTitle}" - ${site.artistName}`}</p>
+                            <p>{`"${site.songTitle}" - ${site.artists.map((a) => a.name).join(", ")}`}</p>
                         </Link>
                     ))
                 ) : (

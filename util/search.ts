@@ -1,4 +1,4 @@
-import { Site } from "@/lib/sampleData";
+import { Site } from "@/lib/siteData";
 
 function sanitizeQuery(query: string): string {
     return query
@@ -15,6 +15,6 @@ export function searchSites(sites: Site[], query: string): Site[] {
     return sites.filter(
         (site) =>
             sanitizeQuery(site.songTitle).includes(sanitized) ||
-            sanitizeQuery(site.artistName).includes(sanitized),
+            site.artists.some((artist) => sanitizeQuery(artist.name).includes(sanitized)),
     );
 }

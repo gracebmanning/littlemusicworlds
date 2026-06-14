@@ -1,4 +1,4 @@
-import { sites } from "@/lib/sampleData";
+import { sites } from "@/lib/siteData";
 import Grid from "@/components/Grid";
 
 export default function Home() {
