@@ -16,7 +16,7 @@ export default function GridSearch({
             <svg
                 stroke="#3d348b"
                 fill="#3d348b"
-                stroke-width="0"
+                strokeWidth="0"
                 viewBox="0 0 500 500"
                 height="22px"
                 width="22px"
