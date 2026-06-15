@@ -8,6 +8,7 @@ const astaSans = Asta_Sans({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://littlemusicworlds.net"),
     title: "Little Music Worlds",
     description: "Step into little music worlds.",
 };
