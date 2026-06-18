@@ -11,11 +11,12 @@ export default function BounceCanvas() {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     useEffect(() => {
-        if (!canvasRef.current) return;
-        paper.setup(canvasRef.current); // initialize paper.js with the canvas
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        paper.setup(canvas); // initialize paper.js with the canvas
 
-        const canvasWidth = paper.view.viewSize.width;
-        const canvasHeight = paper.view.viewSize.height;
+        // const canvasWidth = paper.view.viewSize.width;
+        // const canvasHeight = paper.view.viewSize.height;
 
         const { Engine, Bodies, Composite } = Matter;
         const engine = Engine.create();
@@ -23,25 +24,25 @@ export default function BounceCanvas() {
         engine.gravity.y = 1;
 
         const thickness = 110;
-        Composite.add(world, [
-            Bodies.rectangle(
-                canvasWidth / 2,
-                canvasHeight + thickness / 2,
-                canvasWidth,
-                thickness,
-                { isStatic: true },
-            ),
-            Bodies.rectangle(-thickness / 2, canvasHeight / 2, thickness, canvasHeight * 2, {
-                isStatic: true,
-            }),
-            Bodies.rectangle(
-                canvasWidth + thickness / 2,
-                canvasHeight / 2,
-                thickness,
-                canvasHeight * 2,
-                { isStatic: true },
-            ),
-        ]);
+        let bounds: Matter.Body[] = [];
+        const buildBounds = () => {
+            const width = paper.view.viewSize.width;
+            const height = paper.view.viewSize.height;
+            if (bounds.length) Composite.remove(world, bounds); // clear current bounds
+            bounds = [
+                Bodies.rectangle(width / 2, height + thickness / 2, width, thickness, {
+                    isStatic: true,
+                }),
+                Bodies.rectangle(-thickness / 2, height / 2, thickness, height * 2, {
+                    isStatic: true,
+                }),
+                Bodies.rectangle(width + thickness / 2, height / 2, thickness, height * 2, {
+                    isStatic: true,
+                }),
+            ];
+            Composite.add(world, bounds);
+        };
+        buildBounds();
 
         const circles: { paperShape: paper.Path.Circle; matterBody: Matter.Body }[] = [];
 
@@ -72,7 +73,7 @@ export default function BounceCanvas() {
             count = count === COLORS.length - 1 ? 0 : count + 1;
         };
 
-        paper.view.onFrame = function (event: paper.Event) {
+        paper.view.onFrame = function () {
             Engine.update(engine);
 
             for (const { paperShape, matterBody } of circles) {
@@ -80,7 +81,14 @@ export default function BounceCanvas() {
             }
         };
 
+        const resizeObserver = new ResizeObserver(() => {
+            paper.view.viewSize = new paper.Size(canvas.clientWidth, canvas.clientHeight); // adjust paper.js canvas size
+            buildBounds(); // adjust matter.js bounds
+        });
+        resizeObserver.observe(canvas);
+
         return () => {
+            resizeObserver.disconnect();
             tool.remove();
             paper.project?.remove();
             paper.view?.remove();
