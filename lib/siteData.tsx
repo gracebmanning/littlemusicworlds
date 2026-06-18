@@ -13,11 +13,25 @@ export interface Site {
     thumbnail: string;
     embedPlayer: Player;
     coverArt?: string; // optional standalone image URL
+    contentWarning?: string; // ex: "This site contains intense strobing effects."
 }
 
 export const sitePath = (s: Site) => `/${s.artists[0].slug}/${s.songSlug}`;
 
 export const sites: Site[] = [
+    {
+        songTitle: "Bounce",
+        songSlug: "bounce",
+        artists: [
+            {
+                name: "Tommy Fleece",
+                slug: "tommy-fleece",
+            },
+        ],
+        publishDate: "2026-06-13",
+        thumbnail: "/images/rectangle.png",
+        embedPlayer: { source: "spotify", id: "1AI3sVDlYHrWP0vRLBkaDS" },
+    },
     {
         songTitle: "Sin City",
         songSlug: "sin-city",
