@@ -17,12 +17,12 @@ export const sitePath = (s: Site) => `/${s.artists[0].slug}/${s.songSlug}`;
 
 export const sites: Site[] = [
     {
-        songTitle: "Bounce",
-        songSlug: "bounce",
+        songTitle: "Treehouse",
+        songSlug: "treehouse",
         artists: [
             {
-                name: "Tommy Fleece",
-                slug: "tommy-fleece",
+                name: "Alex G",
+                slug: "alex-g",
             },
         ],
         publishDate: "2026-06-13",
@@ -35,6 +35,18 @@ export const sites: Site[] = [
             {
                 name: "Lucy Lamb",
                 slug: "lucy-lamb",
+            },
+        ],
+        publishDate: "2026-06-13",
+        thumbnail: "/images/rectangle.png",
+    },
+    {
+        songTitle: "Bounce",
+        songSlug: "bounce",
+        artists: [
+            {
+                name: "Tommy Fleece",
+                slug: "tommy-fleece",
             },
         ],
         publishDate: "2026-06-13",
@@ -71,18 +83,6 @@ export const sites: Site[] = [
             {
                 name: "Tonstartssbandht",
                 slug: "tonstartssbandht",
-            },
-        ],
-        publishDate: "2026-06-13",
-        thumbnail: "/images/rectangle.png",
-    },
-    {
-        songTitle: "Treehouse",
-        songSlug: "treehouse",
-        artists: [
-            {
-                name: "Alex G",
-                slug: "alex-g",
             },
         ],
         publishDate: "2026-06-13",
