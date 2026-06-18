@@ -4,19 +4,20 @@ import paper from "paper";
 import Matter from "matter-js";
 
 const MIN_RADIUS = 25;
-const MAX_RADIUS = 65;
+const MAX_RADIUS = 75;
 const COLORS = ["#0020BE", "#C61200", "#127400", "#5F0F80", "#FF9700", "#E4539C"];
 
-export default function BounceCanvas() {
+export default function BounceCanvas({
+    embedSize,
+}: {
+    embedSize: { width: number; height: number };
+}) {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
         paper.setup(canvas); // initialize paper.js with the canvas
-
-        // const canvasWidth = paper.view.viewSize.width;
-        // const canvasHeight = paper.view.viewSize.height;
 
         const { Engine, Bodies, Composite } = Matter;
         const engine = Engine.create();
@@ -40,6 +41,11 @@ export default function BounceCanvas() {
                     isStatic: true,
                 }),
             ];
+            bounds.push(
+                Bodies.rectangle(width / 2, height / 2, embedSize.width, embedSize.height, {
+                    isStatic: true,
+                }),
+            );
             Composite.add(world, bounds);
         };
         buildBounds();
@@ -94,7 +100,7 @@ export default function BounceCanvas() {
             paper.view?.remove();
             Engine.clear(engine);
         };
-    }, []);
+    }, [embedSize]);
 
     return <canvas ref={canvasRef} className="w-full h-full block" />;
 }

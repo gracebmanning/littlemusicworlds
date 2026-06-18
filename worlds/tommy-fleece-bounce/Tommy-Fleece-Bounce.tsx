@@ -2,22 +2,10 @@
 import WorldGate, { useWorldEntered } from "@/components/WorldGate";
 import { Site } from "@/lib/siteData";
 import dynamic from "next/dynamic";
+import { BounceEmbed } from "./BounceEmbed";
 
 const BounceCanvas = dynamic(() => import("../tommy-fleece-bounce/BounceCanvas"), { ssr: false });
-
-const BounceEmbed = () => {
-    return (
-        <iframe
-            width="315"
-            height="315"
-            src="https://www.youtube.com/embed/F6aYsopTmWo?si=Co8X6KguqXqtTQE5&amp;start=63&amp;autoplay=1&amp;controls=0&amp;loop=1"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-        ></iframe>
-    );
-};
+const EMBED_SIZE = { width: 314, height: 314 };
 
 function BounceContent() {
     const entered = useWorldEntered();
@@ -29,7 +17,7 @@ function BounceContent() {
                 <BounceEmbed />
             </div>
             <div className="absolute inset-0 z-0">
-                <BounceCanvas />
+                <BounceCanvas embedSize={EMBED_SIZE} />
             </div>
         </main>
     );
