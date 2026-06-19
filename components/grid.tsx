@@ -41,7 +41,18 @@ export default function Grid({ sites }: { sites: Site[] }) {
                                 height="250"
                                 className="w-full rounded-lg"
                             />
-                            <p>{`"${site.songTitle}" - ${site.artists.map((a) => a.name).join(", ")}`}</p>
+                            <div className="flex flex-col justify-center items-center">
+                                {site.active ? (
+                                    <p>{`"${site.songTitle}" - ${site.artists.map((a) => a.name).join(", ")}`}</p>
+                                ) : (
+                                    <p>{`"??????" - ??????`}</p>
+                                )}
+                                {site.publishDate.length > 0 && site.active ? (
+                                    <p>{site.publishDate}</p>
+                                ) : (
+                                    <p>TBD</p>
+                                )}
+                            </div>
                         </Link>
                     ))
                 ) : (
