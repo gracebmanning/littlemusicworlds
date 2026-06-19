@@ -43,14 +43,14 @@ export default function Grid({ sites }: { sites: Site[] }) {
                             />
                             <div className="flex flex-col justify-center items-center">
                                 {site.active ? (
-                                    <p>{`"${site.songTitle}" - ${site.artists.map((a) => a.name).join(", ")}`}</p>
+                                    <p className="text-center">{`"${site.songTitle}" - ${site.artists.map((a) => a.name).join(", ")}`}</p>
                                 ) : (
-                                    <p>{`"??????" - ??????`}</p>
+                                    <p className="text-center">{`"??????" - ??????`}</p>
                                 )}
                                 {site.publishDate.length > 0 && site.active ? (
-                                    <p>{site.publishDate}</p>
+                                    <p className="text-center">{site.publishDate}</p>
                                 ) : (
-                                    <p>TBD</p>
+                                    <p className="text-center">TBD</p>
                                 )}
                             </div>
                         </Link>

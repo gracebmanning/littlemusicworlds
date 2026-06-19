@@ -6,15 +6,14 @@ export default function Home() {
         <div className="flex flex-col flex-1 items-center justify-start px-8 md:px-10 lg:px-20 py-20">
             <div className="flex flex-col justify-center items-center gap-6 mb-10">
                 <h1 className="text-4xl">littlemusicworlds.net</h1>
-                <h2 className="text-base flex flex-row justify-center items-center gap-2">
-                    created by{" "}
+                <h2 className="text-base flex flex-col md:flex-row justify-center items-center gap-x-4 gap-y-2">
                     <a
                         href="https://graceis.online/"
                         target="_blank"
                         rel="noreferrer"
-                        className="w-fit flex flex-row justify-start items-center gap-1 tracking-wide font-medium bg-foreground text-background px-1 py-0.5 rounded-sm"
+                        className="w-full md:w-fit inline-flex flex-row justify-start items-center gap-1 tracking-wide font-medium bg-foreground text-background px-1 py-0.5 rounded-sm"
                     >
-                        Grace Manning{" "}
+                        created by Grace Manning{" "}
                         <svg
                             stroke="#191716"
                             fill="none"
@@ -31,12 +30,11 @@ export default function Home() {
                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                         </svg>
                     </a>
-                    {" | "}
                     <a
                         href="https://github.com/gracebmanning/littlemusicworlds"
                         target="_blank"
                         rel="noreferrer"
-                        className="w-fit flex flex-row justify-start items-center gap-1 tracking-wide font-medium bg-accent-one text-accent-two px-1 py-0.5 rounded-sm"
+                        className="w-full md:w-fit inline-flex flex-row justify-start items-center gap-1 tracking-wide font-medium bg-accent-one text-accent-two px-1 py-0.5 rounded-sm"
                     >
                         This project is open source{" "}
                         <svg
