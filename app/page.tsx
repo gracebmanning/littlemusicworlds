@@ -56,6 +56,7 @@ export default function Home() {
                 </h2>
             </div>
             <Grid sites={sites} />
+            <p className="mt-12 text-lg">More sites coming soon!</p>
         </div>
     );
 }

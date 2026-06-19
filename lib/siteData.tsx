@@ -4,7 +4,6 @@ interface Artist {
 }
 
 export interface Site {
-    active: boolean;
     songTitle: string;
     songSlug: string;
     artists: Artist[];
@@ -18,7 +17,6 @@ export const sitePath = (s: Site) => `/${s.artists[0].slug}/${s.songSlug}`;
 
 export const sites: Site[] = [
     {
-        active: true,
         songTitle: "Treehouse",
         songSlug: "treehouse",
         artists: [
@@ -27,11 +25,10 @@ export const sites: Site[] = [
                 slug: "alex-g",
             },
         ],
-        publishDate: "2026-06-13",
+        publishDate: "2026-06-21",
         thumbnail: "/images/rectangle.png",
     },
     {
-        active: true,
         songTitle: "Sin City",
         songSlug: "sin-city",
         artists: [
@@ -40,11 +37,10 @@ export const sites: Site[] = [
                 slug: "lucy-lamb",
             },
         ],
-        publishDate: "2026-06-13",
+        publishDate: "2026-06-20",
         thumbnail: "/images/rectangle.png",
     },
     {
-        active: true,
         songTitle: "Bounce",
         songSlug: "bounce",
         artists: [
@@ -53,11 +49,10 @@ export const sites: Site[] = [
                 slug: "tommy-fleece",
             },
         ],
-        publishDate: "2026-06-13",
+        publishDate: "2026-06-19",
         thumbnail: "/images/rectangle.png",
     },
     {
-        active: false,
         songTitle: "Hot 'n Cold",
         songSlug: "hot-n-cold",
         artists: [
@@ -67,10 +62,9 @@ export const sites: Site[] = [
             },
         ],
         publishDate: "2026-06-13",
-        thumbnail: "/images/coming_soon.png",
+        thumbnail: "/images/rectangle.png",
     },
     {
-        active: false,
         songTitle: "Where's Your Head At",
         songSlug: "wheres-your-head-at",
         artists: [
@@ -80,10 +74,9 @@ export const sites: Site[] = [
             },
         ],
         publishDate: "2026-06-13",
-        thumbnail: "/images/coming_soon.png",
+        thumbnail: "/images/rectangle.png",
     },
     {
-        active: false,
         songTitle: "Black Country",
         songSlug: "black-country",
         artists: [
@@ -93,10 +86,9 @@ export const sites: Site[] = [
             },
         ],
         publishDate: "2026-06-13",
-        thumbnail: "/images/coming_soon.png",
+        thumbnail: "/images/rectangle.png",
     },
     {
-        active: false,
         songTitle: "Fort Greene Park",
         songSlug: "fort-greene-park",
         artists: [
@@ -106,6 +98,6 @@ export const sites: Site[] = [
             },
         ],
         publishDate: "2026-06-13",
-        thumbnail: "/images/coming_soon.png",
+        thumbnail: "/images/rectangle.png",
     },
 ];

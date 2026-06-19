@@ -5,10 +5,13 @@ import Link from "next/link";
 import { Site, sitePath } from "@/lib/siteData";
 import { searchSites } from "@/util/search";
 import GridSearch from "./GridSearch";
+import GridSort from "./GridSort";
+import { formatDateMonthDayYear } from "@/util/formatDate";
 
 export default function Grid({ sites }: { sites: Site[] }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [debouncedQuery, setDebouncedQuery] = useState("");
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -18,13 +21,20 @@ export default function Grid({ sites }: { sites: Site[] }) {
     }, [searchQuery]);
 
     const filteredSites = useMemo(() => {
-        return searchSites(sites, debouncedQuery);
-    }, [debouncedQuery, sites]);
+        const searched = searchSites(sites, debouncedQuery);
+        const sorted = [...searched].sort((a, b) => {
+            const dateA = new Date(a.publishDate).getTime();
+            const dateB = new Date(b.publishDate).getTime();
+            return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+        });
+        return sorted;
+    }, [debouncedQuery, sites, sortOrder]);
 
     return (
         <div className="w-full flex flex-col gap-8 justify-center items-center">
-            <div className="w-full flex flex-row justify-end">
+            <div className="w-full flex flex-row justify-end gap-2">
                 <GridSearch searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+                <GridSort sortOrder={sortOrder} onSortChange={setSortOrder} />
             </div>
             <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8 md:gap-x-12 lg:gap-x-20">
                 {filteredSites.length > 0 ? (
@@ -42,15 +52,11 @@ export default function Grid({ sites }: { sites: Site[] }) {
                                 className="w-full rounded-lg"
                             />
                             <div className="flex flex-col justify-center items-center">
-                                {site.active ? (
-                                    <p className="text-center">{`"${site.songTitle}" - ${site.artists.map((a) => a.name).join(", ")}`}</p>
-                                ) : (
-                                    <p className="text-center">{`"??????" - ??????`}</p>
-                                )}
-                                {site.publishDate.length > 0 && site.active ? (
-                                    <p className="text-center">{site.publishDate}</p>
-                                ) : (
-                                    <p className="text-center">TBD</p>
+                                <p className="text-center">{`"${site.songTitle}" - ${site.artists.map((a) => a.name).join(", ")}`}</p>
+                                {site.publishDate.length > 0 && (
+                                    <p className="text-center">
+                                        {formatDateMonthDayYear(site.publishDate)}
+                                    </p>
                                 )}
                             </div>
                         </Link>

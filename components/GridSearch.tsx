@@ -12,7 +12,7 @@ export default function GridSearch({
     };
 
     return (
-        <div className="relative w-1/5">
+        <div className="relative w-full md:w-2/5 lg:w-1/5">
             <svg
                 stroke="#3d348b"
                 fill="#3d348b"
