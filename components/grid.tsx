@@ -38,7 +38,7 @@ export default function Grid({ sites }: { sites: Site[] }) {
             </div>
             <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8 md:gap-x-12 lg:gap-x-20">
                 {filteredSites.length > 0 ? (
-                    filteredSites.map((site) => (
+                    filteredSites.map((site, index) => (
                         <Link
                             key={sitePath(site)}
                             href={sitePath(site)}
@@ -51,6 +51,7 @@ export default function Grid({ sites }: { sites: Site[] }) {
                                     fill
                                     sizes="(min-width: 1024px) 33vw, 50vw"
                                     className="object-cover"
+                                    priority={index < 3}
                                 />
                             </div>
                             <div className="flex flex-col justify-center items-center">

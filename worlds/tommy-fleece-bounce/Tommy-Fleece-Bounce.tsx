@@ -25,7 +25,7 @@ function useIsMobile() {
 
 function BounceContent() {
     const entered = useWorldEntered();
-    const resetRef = useRef<() => void | null>(null);
+    const resetRef = useRef<(() => void) | null>(null);
     const [{ count, max }, setInfo] = useState({ count: 0, max: 0 });
     const maxed = max > 0 && count >= max;
     const [tiltDeg, setTiltDeg] = useState(0);
