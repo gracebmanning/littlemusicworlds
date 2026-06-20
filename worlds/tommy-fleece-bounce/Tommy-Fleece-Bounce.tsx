@@ -14,6 +14,7 @@ function BounceContent() {
     const resetRef = useRef<() => void | null>(null);
     const [{ count, max }, setInfo] = useState({ count: 0, max: 0 });
     const maxed = max > 0 && count >= max;
+    const [tiltDeg, setTiltDeg] = useState(0);
 
     if (!entered) return null;
 
@@ -24,6 +25,7 @@ function BounceContent() {
                     ← go home
                 </Link>
                 <p className="w-fit text-sm text-[#127400] uppercase">Click in the white space</p>
+                <span className="tabular-nums text-neutral-500">{tiltDeg}°</span>
                 <span>
                     <button
                         onClick={() => resetRef.current?.()}
@@ -45,6 +47,7 @@ function BounceContent() {
                 <BounceCanvas
                     embedSize={EMBED_SIZE}
                     onCountChange={(count, max) => setInfo({ count, max })}
+                    onTiltChange={setTiltDeg}
                     onReset={(callback) => {
                         resetRef.current = callback;
                     }}
