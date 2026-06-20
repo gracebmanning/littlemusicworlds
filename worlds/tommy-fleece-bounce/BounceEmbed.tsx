@@ -1,8 +1,8 @@
-export const BounceEmbed = () => {
+export const BounceEmbed = ({ size }: { size: number }) => {
     return (
         <iframe
-            width="310"
-            height="310"
+            width={size}
+            height={size}
             src="https://www.youtube.com/embed/F6aYsopTmWo?si=Co8X6KguqXqtTQE5&amp;start=17&amp;autoplay=1&amp;controls=0&amp;loop=1"
             title="YouTube video player"
             frameBorder="0"

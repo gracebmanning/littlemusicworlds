@@ -3,11 +3,6 @@ import { useEffect, useRef } from "react";
 import paper from "paper";
 import Matter from "matter-js";
 
-const MIN_RADIUS = 25;
-const MAX_RADIUS = 75;
-
-const isMobile = () => window.innerWidth < 768;
-const MAX_CIRCLES = isMobile() ? 70 : 120;
 const NAVBAR_HEIGHT = 32;
 
 const TILT_LIMIT = Math.PI / 4; // (+/-) 45 degrees
@@ -18,11 +13,15 @@ const COLORS = ["#0020BE", "#C61200", "#127400", "#5F0F80", "#FF9700", "#E4539C"
 
 export default function BounceCanvas({
     embedSize,
+    radiusRange,
+    maxCircles,
     onCountChange,
     onTiltChange,
     onReset,
 }: {
     embedSize: { width: number; height: number };
+    radiusRange: { min: number; max: number };
+    maxCircles: number;
     onCountChange?: (count: number, max: number) => void;
     onTiltChange?: (degrees: number) => void;
     onReset?: (callback: () => void) => void;
@@ -30,17 +29,23 @@ export default function BounceCanvas({
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const circlesRef = useRef<{ paperShape: paper.Path.Circle; matterBody: Matter.Body }[]>([]);
     const colorIndexRef = useRef(0);
+    const embedSizeRef = useRef(embedSize);
+    const rebuildBoundsRef = useRef<(() => void) | null>(null);
+    const radiusRangeRef = useRef(radiusRange);
+    const maxCirclesRef = useRef(maxCircles);
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
+        const container = canvas.parentElement;
+        if (!container) return;
         paper.setup(canvas); // initialize paper.js with the canvas
 
         const { Engine, Bodies, Composite } = Matter;
         const engine = Engine.create();
         const world = engine.world;
 
-        const report = () => onCountChange?.(circlesRef.current.length, MAX_CIRCLES);
+        const report = () => onCountChange?.(circlesRef.current.length, maxCirclesRef.current);
 
         const circlesLayer = paper.project.activeLayer;
         const tiltLayer = new paper.Layer();
@@ -72,7 +77,7 @@ export default function BounceCanvas({
                 [0, 0],
                 [0, 0],
             ],
-            strokeColor: "#5F0F80",
+            strokeColor: "rgba(25, 23, 22, 0.9)",
             strokeWidth: 2,
             dashArray: [6, 6],
         });
@@ -82,7 +87,7 @@ export default function BounceCanvas({
             const ring = new paper.Path.Circle({
                 center: [0, 0],
                 radius: ANCHOR_RADIUS,
-                fillColor: "#5F0F80",
+                fillColor: "rgba(25, 23, 22, 0.9)",
             });
             const dots = [-5, 0, 5].map(
                 (y) =>
@@ -165,8 +170,8 @@ export default function BounceCanvas({
             const embedBarrier = Bodies.rectangle(
                 width / 2,
                 (height + NAVBAR_HEIGHT) / 2,
-                embedSize.width,
-                embedSize.height,
+                embedSizeRef.current.width + 2,
+                embedSizeRef.current.height + 2,
                 {
                     isStatic: true,
                 },
@@ -175,6 +180,7 @@ export default function BounceCanvas({
             bounds = [ceiling, floor, leftWall, rightWall, embedBarrier];
             Composite.add(world, bounds);
         };
+        rebuildBoundsRef.current = buildBounds;
 
         recomputeLayout();
         buildBounds();
@@ -184,8 +190,9 @@ export default function BounceCanvas({
         onTiltChange?.(0);
 
         const createCircle = (point: paper.Point) => {
-            if (circlesRef.current.length >= MAX_CIRCLES) return;
-            const radius = Math.floor(Math.random() * (MAX_RADIUS - MIN_RADIUS + 1)) + MIN_RADIUS;
+            if (circlesRef.current.length >= maxCirclesRef.current) return;
+            const { min, max } = radiusRangeRef.current;
+            const radius = Math.floor(Math.random() * (max - min + 1)) + min;
 
             const matterCircle = Bodies.circle(point.x, point.y, radius, {
                 restitution: 1,
@@ -262,12 +269,12 @@ export default function BounceCanvas({
         };
 
         const resizeObserver = new ResizeObserver(() => {
-            paper.view.viewSize = new paper.Size(canvas.clientWidth, canvas.clientHeight); // adjust paper.js canvas size
+            paper.view.viewSize = new paper.Size(container.clientWidth, container.clientHeight);
             recomputeLayout();
             buildBounds();
             updateTiltVisuals();
         });
-        resizeObserver.observe(canvas);
+        resizeObserver.observe(container);
 
         return () => {
             resizeObserver.disconnect();
@@ -278,6 +285,19 @@ export default function BounceCanvas({
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        embedSizeRef.current = embedSize;
+        rebuildBoundsRef.current?.();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [embedSize.width, embedSize.height]);
+
+    useEffect(() => {
+        radiusRangeRef.current = radiusRange;
+        maxCirclesRef.current = maxCircles;
+        onCountChange?.(circlesRef.current.length, maxCircles);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [maxCircles, radiusRange.min, radiusRange.max]);
 
     return <canvas ref={canvasRef} className="w-full h-full block" />;
 }
