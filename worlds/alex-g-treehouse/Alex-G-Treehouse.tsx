@@ -1,30 +1,41 @@
 "use client";
 import WorldGate, { useWorldEntered } from "@/components/WorldGate";
 import { Site } from "@/lib/siteData";
-
-const TreehouseEmbed = () => {
-    return (
-        <div>
-            <iframe
-                width="315"
-                height="315"
-                src="https://www.youtube.com/embed/I_5lEJjGgto?si=rl-aGqUE2hvcW6Yi&amp;autoplay=1&amp;controls=0"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-            ></iframe>
-        </div>
-    );
-};
+import { TreehouseEmbed } from "./TreehouseEmbed";
+import Image from "next/image";
+import Link from "next/link";
 
 function TreehouseContent() {
     const entered = useWorldEntered();
     if (!entered) return null;
 
     return (
-        <main className="w-full min-h-screen flex flex-col justify-center items-center">
-            <TreehouseEmbed />
+        <main className="relative w-full h-full min-h-screen flex flex-col justify-center items-center bg-[url('/images/field_of_grass.jpg')] bg-cover">
+            <div className="w-full">
+                <Link href="/" className="underline">
+                    ← go home
+                </Link>
+            </div>
+            <div className="relative w-full grow">
+                <div className="absolute bottom-5 right-5">
+                    <TreehouseEmbed />
+                </div>
+                <Image
+                    src="/images/computer.gif"
+                    alt=""
+                    width="180"
+                    height="126"
+                    className="absolute top-[40%] left-50 z-10"
+                    unoptimized
+                />
+                <Image
+                    src="/images/desk.svg"
+                    alt=""
+                    width="500"
+                    height="290"
+                    className="absolute top-1/2 left-10 z-5"
+                />
+            </div>
         </main>
     );
 }
@@ -36,3 +47,8 @@ export default function AlexGTreehouse({ site }: { site: Site }) {
         </WorldGate>
     );
 }
+
+// desk: https://publicdomainvectors.org/en/free-clipart/Office-desk-vector-illustration/11004.html
+// computer - original site: https://web.archive.org/web/20011230035715/http://br.geocities.com:80/adrianocaramello/computador01.gif
+// computer - solo: https://blob.gifcities.org/gifcities/4CYYPJFEYJMKKXSJKSU3IDWNCTE7FTTR.gif
+// field: https://commons.wikimedia.org/wiki/File:Field_of_grass_-_geograph.org.uk_-_436971.jpg
