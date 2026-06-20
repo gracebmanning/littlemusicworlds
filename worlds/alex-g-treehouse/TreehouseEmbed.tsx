@@ -1,5 +1,5 @@
 export const TreehouseEmbed = () => {
-    const width = 150;
+    const width = 100;
     return (
         <iframe
             width={width}

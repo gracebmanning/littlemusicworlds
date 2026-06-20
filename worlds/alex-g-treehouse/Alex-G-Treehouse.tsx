@@ -12,13 +12,16 @@ function TreehouseContent() {
 
     return (
         <main className="relative w-full h-full min-h-screen flex flex-col justify-center items-center bg-[url('/images/field_of_grass.jpg')] bg-cover">
-            <div className="w-full">
-                <Link href="/" className="underline">
+            <div className="w-full px-1 py-0.5 flex flex-row justify-between items-center">
+                <Link href="/" className="underline px-0.5 py-px">
                     ← go home
                 </Link>
+                <button className="underline px-0.5 py-px text-accent-one bg-accent-two hover:cursor-pointer">
+                    reset tiles
+                </button>
             </div>
             <div className="relative w-full grow">
-                <div className="absolute bottom-5 right-5 z-30">
+                <div className="absolute bottom-55 left-20 z-30 perspective-dramatic">
                     <TreehouseEmbed />
                 </div>
                 <Image
