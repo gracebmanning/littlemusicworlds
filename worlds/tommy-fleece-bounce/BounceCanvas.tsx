@@ -196,6 +196,9 @@ export default function BounceCanvas({
 
             const matterCircle = Bodies.circle(point.x, point.y, radius, {
                 restitution: 1,
+                frictionAir: 0.005, // defaults to 0.01
+                friction: 0.01, // defaults to 0.1
+                frictionStatic: 0.05, // defaults to 0.5
             });
             Composite.add(world, matterCircle);
 
