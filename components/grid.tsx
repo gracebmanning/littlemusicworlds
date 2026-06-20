@@ -44,13 +44,15 @@ export default function Grid({ sites }: { sites: Site[] }) {
                             href={sitePath(site)}
                             className="flex flex-col justify-center items-center gap-2"
                         >
-                            <Image
-                                src={site.thumbnail}
-                                alt="Lavender rectangle"
-                                width="350"
-                                height="250"
-                                className="w-full rounded-lg"
-                            />
+                            <div className="relative w-full aspect-video overflow-hidden rounded-lg">
+                                <Image
+                                    src={site.thumbnail}
+                                    alt={`Thumbnail for "${site.songTitle}" by ${site.artists.map((a) => a.name).join(", ")}`}
+                                    fill
+                                    sizes="(min-width: 1024px) 33vw, 50vw"
+                                    className="object-cover"
+                                />
+                            </div>
                             <div className="flex flex-col justify-center items-center">
                                 <p className="text-center">{`"${site.songTitle}" - ${site.artists.map((a) => a.name).join(", ")}`}</p>
                                 {site.publishDate.length > 0 && (

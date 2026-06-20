@@ -29,18 +29,6 @@ export const sites: Site[] = [
         thumbnail: "/images/rectangle.png",
     },
     {
-        songTitle: "Sin City",
-        songSlug: "sin-city",
-        artists: [
-            {
-                name: "Lucy Lamb",
-                slug: "lucy-lamb",
-            },
-        ],
-        publishDate: "2026-06-20",
-        thumbnail: "/images/rectangle.png",
-    },
-    {
         songTitle: "Bounce",
         songSlug: "bounce",
         artists: [
@@ -49,55 +37,70 @@ export const sites: Site[] = [
                 slug: "tommy-fleece",
             },
         ],
-        publishDate: "2026-06-19",
-        thumbnail: "/images/rectangle.png",
-    },
-    {
-        songTitle: "Hot 'n Cold",
-        songSlug: "hot-n-cold",
-        artists: [
-            {
-                name: "Basement Jaxx",
-                slug: "basement-jaxx",
-            },
-        ],
-        publishDate: "2026-06-13",
-        thumbnail: "/images/rectangle.png",
-    },
-    {
-        songTitle: "Where's Your Head At",
-        songSlug: "wheres-your-head-at",
-        artists: [
-            {
-                name: "Basement Jaxx",
-                slug: "basement-jaxx",
-            },
-        ],
-        publishDate: "2026-06-13",
-        thumbnail: "/images/rectangle.png",
-    },
-    {
-        songTitle: "Black Country",
-        songSlug: "black-country",
-        artists: [
-            {
-                name: "Tonstartssbandht",
-                slug: "tonstartssbandht",
-            },
-        ],
-        publishDate: "2026-06-13",
-        thumbnail: "/images/rectangle.png",
-    },
-    {
-        songTitle: "Fort Greene Park",
-        songSlug: "fort-greene-park",
-        artists: [
-            {
-                name: "Battles",
-                slug: "battles",
-            },
-        ],
-        publishDate: "2026-06-13",
-        thumbnail: "/images/rectangle.png",
+        publishDate: "2026-06-20",
+        thumbnail: "/images/thumbnails/tommy-fleece-bounce.png",
     },
 ];
+
+/*
+{
+    songTitle: "Sin City",
+    songSlug: "sin-city",
+    artists: [
+        {
+            name: "Lucy Lamb",
+            slug: "lucy-lamb",
+        },
+    ],
+    publishDate: "2026-06-20",
+    thumbnail: "/images/rectangle.png",
+},
+{
+    songTitle: "Hot 'n Cold",
+    songSlug: "hot-n-cold",
+    artists: [
+        {
+            name: "Basement Jaxx",
+            slug: "basement-jaxx",
+        },
+    ],
+    publishDate: "2026-06-13",
+    thumbnail: "/images/rectangle.png",
+},
+{
+    songTitle: "Where's Your Head At",
+    songSlug: "wheres-your-head-at",
+    artists: [
+        {
+            name: "Basement Jaxx",
+            slug: "basement-jaxx",
+        },
+    ],
+    publishDate: "2026-06-13",
+    thumbnail: "/images/rectangle.png",
+},
+{
+    songTitle: "Black Country",
+    songSlug: "black-country",
+    artists: [
+        {
+            name: "Tonstartssbandht",
+            slug: "tonstartssbandht",
+        },
+    ],
+    publishDate: "2026-06-13",
+    thumbnail: "/images/rectangle.png",
+},
+{
+    songTitle: "Fort Greene Park",
+    songSlug: "fort-greene-park",
+    artists: [
+        {
+            name: "Battles",
+            slug: "battles",
+        },
+    ],
+    publishDate: "2026-06-13",
+    thumbnail: "/images/rectangle.png",
+},
+*/
