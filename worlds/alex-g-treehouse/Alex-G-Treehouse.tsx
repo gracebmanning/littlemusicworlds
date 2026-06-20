@@ -4,6 +4,7 @@ import { Site } from "@/lib/siteData";
 import { TreehouseEmbed } from "./TreehouseEmbed";
 import Image from "next/image";
 import Link from "next/link";
+import TreehouseMagnets from "./TreehouseMagnets";
 
 function TreehouseContent() {
     const entered = useWorldEntered();
@@ -17,7 +18,7 @@ function TreehouseContent() {
                 </Link>
             </div>
             <div className="relative w-full grow">
-                <div className="absolute bottom-5 right-5">
+                <div className="absolute bottom-5 right-5 z-30">
                     <TreehouseEmbed />
                 </div>
                 <Image
@@ -33,8 +34,9 @@ function TreehouseContent() {
                     alt=""
                     width="500"
                     height="290"
-                    className="absolute top-1/2 left-10 z-5"
+                    className="absolute top-1/2 left-10 z-0"
                 />
+                <TreehouseMagnets />
             </div>
         </main>
     );
