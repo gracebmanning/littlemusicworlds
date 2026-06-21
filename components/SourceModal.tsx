@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import type { ImageAsset } from "@/lib/assets";
 import Image from "next/image";
+import { newTab_foreground } from "@/lib/icons";
 
 const SourceModal = ({
     onClose,
@@ -69,21 +70,7 @@ const SourceModal = ({
                                 className="flex flex-row justify-start items-center underline gap-1"
                             >
                                 {asset.origin.title}
-                                <svg
-                                    stroke="#d1e231"
-                                    fill="none"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    viewBox="0 0 24 24"
-                                    height="15px"
-                                    width="15px"
-                                    className=""
-                                >
-                                    <path d="M15 3h6v6"></path>
-                                    <path d="M10 14 21 3"></path>
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                </svg>
+                                {newTab_foreground}
                             </a>
                         </li>
                     ))}
