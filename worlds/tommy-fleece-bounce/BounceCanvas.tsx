@@ -64,7 +64,14 @@ export default function BounceCanvas({
             const h = paper.view.viewSize.height;
             centerX = w / 2;
             centerY = (h + NAVBAR_HEIGHT) / 2; // embed's visual center
-            arm = Math.min(w / 2 - 24, 320); // how far out the handles sit
+
+            // upper bound: handles must stay on screen at full tilt
+            const verticalRoom = (h - NAVBAR_HEIGHT) / 2 - ANCHOR_RADIUS - 8;
+            const verticalRoomAtFullTilt = verticalRoom / Math.sin(TILT_LIMIT);
+            // lower bound: ensure handles aren't hidden behind the embed
+            const embedBuffer = embedSizeRef.current.width / 2 + ANCHOR_RADIUS + 8;
+
+            arm = Math.max(embedBuffer, Math.min(w / 2 - 24, verticalRoomAtFullTilt, 320));
         };
 
         const applyGravity = () => {
@@ -191,7 +198,13 @@ export default function BounceCanvas({
 
         const createCircle = (point: paper.Point) => {
             if (circlesRef.current.length >= maxCirclesRef.current) return;
-            const { min, max } = radiusRangeRef.current;
+
+            // ensure circles fit through side gap next to embed
+            const sideGap = (paper.view.viewSize.width - embedSizeRef.current.width) / 2;
+            const fitMax = Math.max(8, sideGap / 2 - 4); // /2 to convert diameter to radius; 4px buffer
+            //const { min, max } = radiusRangeRef.current;
+            const max = Math.min(radiusRangeRef.current.max, fitMax);
+            const min = Math.min(radiusRangeRef.current.min, max);
             const radius = Math.floor(Math.random() * (max - min + 1)) + min;
 
             const matterCircle = Bodies.circle(point.x, point.y, radius, {

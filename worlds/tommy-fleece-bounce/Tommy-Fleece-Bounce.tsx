@@ -12,15 +12,19 @@ const BREAKPOINT = 768;
 
 function subscribeToResize(cb: () => void) {
     window.addEventListener("resize", cb);
-    return () => window.removeEventListener("resize", cb);
+    window.addEventListener("orientationchange", cb);
+    return () => {
+        window.removeEventListener("resize", cb);
+        window.removeEventListener("orientationchange", cb);
+    };
 }
 
-function getIsMobile() {
-    return window.innerWidth < BREAKPOINT;
+function getIsCompact() {
+    return Math.min(window.innerWidth, window.innerHeight) < BREAKPOINT;
 }
 
-function useIsMobile() {
-    return useSyncExternalStore(subscribeToResize, getIsMobile, () => false);
+function useIsCompact() {
+    return useSyncExternalStore(subscribeToResize, getIsCompact, () => false);
 }
 
 function BounceContent() {
@@ -30,16 +34,16 @@ function BounceContent() {
     const maxed = max > 0 && count >= max;
     const [tiltDeg, setTiltDeg] = useState(0);
 
-    const isMobile = useIsMobile();
+    const isCompact = useIsCompact();
     const embedSize = useMemo(() => {
-        const width = isMobile ? 200 : 310;
+        const width = isCompact ? 200 : 310;
         return { width: width, height: width };
-    }, [isMobile]);
+    }, [isCompact]);
     const radiusRange = useMemo(
-        () => (isMobile ? { min: 15, max: 55 } : { min: 25, max: 75 }),
-        [isMobile],
+        () => (isCompact ? { min: 15, max: 55 } : { min: 25, max: 75 }),
+        [isCompact],
     );
-    const maxCircles = isMobile ? 70 : 120;
+    const maxCircles = isCompact ? 70 : 120;
 
     if (!entered) return null;
 
