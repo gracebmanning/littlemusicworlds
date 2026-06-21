@@ -1,6 +1,6 @@
 # little music worlds
 
-A collection of visual "worlds" designed to reflect how each one makes me feel.
+A collection of visual "worlds" designed to reflect how each song makes me feel.
 
 See it live at [littlemusicworlds.net](https://littlemusicworlds.net).
 
