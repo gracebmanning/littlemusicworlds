@@ -21,24 +21,26 @@ function TreehouseContent() {
                 </button>
             </div>
             <div className="relative w-full grow">
-                <div className="absolute bottom-55 left-20 z-30 perspective-dramatic">
+                <div className="absolute bottom-5 right-5">
                     <TreehouseEmbed />
                 </div>
-                <Image
-                    src="/images/computer.gif"
-                    alt=""
-                    width="180"
-                    height="126"
-                    className="absolute top-[40%] left-50 z-10"
-                    unoptimized
-                />
-                <Image
-                    src="/images/desk.svg"
-                    alt=""
-                    width="500"
-                    height="290"
-                    className="absolute top-1/2 left-10 z-0"
-                />
+                <div className="absolute left-[2%] md:left-[8%] top-[70%] md:top-[52%] z-0 w-[73vw] md:w-[65vw] max-w-130">
+                    <Image
+                        src="/images/desk.svg"
+                        alt=""
+                        width={500}
+                        height={290}
+                        className="h-auto w-full"
+                    />
+                    <Image
+                        src="/images/computer.gif"
+                        alt=""
+                        width={180}
+                        height={126}
+                        unoptimized
+                        className="absolute left-[32%] bottom-[82%] h-auto w-[36%]"
+                    />
+                </div>
                 <TreehouseMagnets />
             </div>
         </main>
