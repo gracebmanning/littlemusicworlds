@@ -1,13 +1,15 @@
 "use client";
+import { useRef } from "react";
 import WorldGate, { useWorldEntered } from "@/components/WorldGate";
 import { Site } from "@/lib/siteData";
 import { TreehouseEmbed } from "./TreehouseEmbed";
 import Image from "next/image";
 import Link from "next/link";
-import TreehouseMagnets from "./TreehouseMagnets";
+import TreehouseMagnets, { type MagnetsHandle } from "./TreehouseMagnets";
 
 function TreehouseContent() {
     const entered = useWorldEntered();
+    const magnetsRef = useRef<MagnetsHandle>(null);
     if (!entered) return null;
 
     return (
@@ -16,15 +18,18 @@ function TreehouseContent() {
                 <Link href="/" className="underline px-0.5 py-px">
                     ← go home
                 </Link>
-                <button className="underline px-0.5 py-px text-accent-one bg-accent-two hover:cursor-pointer">
-                    reset tiles
+                <button
+                    onClick={() => magnetsRef.current?.reset()}
+                    className="underline px-0.5 py-px text-accent-one bg-accent-two hover:cursor-pointer"
+                >
+                    reset magnets
                 </button>
             </div>
             <div className="relative w-full grow">
                 <div className="absolute bottom-5 right-5">
                     <TreehouseEmbed />
                 </div>
-                <div className="absolute left-[2%] md:left-[8%] top-[70%] md:top-[52%] z-0 w-[73vw] md:w-[65vw] max-w-130">
+                <div className="absolute left-[2%] md:left-[8%] top-[68%] md:top-[60%] lg:top-[52%] z-0 w-[73vw] md:w-[65vw] max-w-130">
                     <Image
                         src="/images/desk.svg"
                         alt=""
@@ -41,7 +46,7 @@ function TreehouseContent() {
                         className="absolute left-[32%] bottom-[82%] h-auto w-[36%]"
                     />
                 </div>
-                <TreehouseMagnets />
+                <TreehouseMagnets ref={magnetsRef} />
             </div>
         </main>
     );

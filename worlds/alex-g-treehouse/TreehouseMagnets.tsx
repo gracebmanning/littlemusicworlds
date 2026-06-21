@@ -1,32 +1,41 @@
-import React, { useLayoutEffect, useRef, useState, useCallback, useEffect } from "react";
+import React, {
+    useLayoutEffect,
+    useRef,
+    useState,
+    useCallback,
+    useEffect,
+    useImperativeHandle,
+} from "react";
 import { WORDS } from "./magnetWords";
 
-type Magnet = { id: number; word: string; x: number; y: number; z: number };
+type Magnet = { id: number; word: string; x: number; y: number; z: number; moved: boolean };
+export type MagnetsHandle = { reset: () => void };
 
 const clamp = (v: number, max: number) => Math.max(0, Math.min(v, max));
 
-export default function TreehouseMagnets() {
+export default function TreehouseMagnets({ ref }: { ref?: React.Ref<MagnetsHandle> }) {
     const containerRef = useRef<HTMLDivElement>(null);
     const dragRef = useRef<{ id: number; dx: number; dy: number } | null>(null);
     const zCounter = useRef(1);
-    const interactedRef = useRef(false);
 
     const [magnets, setMagnets] = useState<Magnet[]>(() =>
         WORDS.map((word, i) => ({
             id: i,
             word,
-            x: 24 + (i % 6) * 110,
-            y: 24 + Math.floor(i / 6) * 52,
+            x: 0,
+            y: 0,
             z: 1,
+            moved: false,
         })),
     );
 
-    const layout = useCallback(() => {
+    const reflow = useCallback((resetAll = false) => {
         const container = containerRef.current;
         if (!container) return;
 
         const magnetTiles = Array.from(container.children) as HTMLElement[];
         const cw = container.clientWidth;
+        const ch = container.clientHeight;
         const gapX = 8;
         const gapY = 8;
         const margin = 16;
@@ -36,69 +45,68 @@ export default function TreehouseMagnets() {
         const isNarrow = cw < 768;
         const groupWidth = isNarrow ? cw - margin * 2 : Math.min(cw * 0.42, 560);
 
-        const rel: { x: number; y: number }[] = [];
-        let cx = 0;
-        let cy = 0;
-        let rowHeight = 0;
-        for (const tile of magnetTiles) {
-            const w = tile.offsetWidth;
-            const h = tile.offsetHeight;
-            if (cx > 0 && cx + w > groupWidth) {
-                cx = 0;
-                cy += rowHeight + gapY;
-                rowHeight = 0;
-            }
-            rel.push({ x: cx, y: cy });
-            cx += w + gapX;
-            rowHeight = Math.max(rowHeight, h);
-        }
-
         // group anchor (top-right on desktop, top-left on mobile)
         const offsetX = isNarrow ? margin : cw - margin - groupWidth;
         const offsetY = margin;
 
-        setMagnets((prev) =>
-            prev.map((m, i) => ({ ...m, x: offsetX + rel[i].x, y: offsetY + rel[i].y })),
-        );
+        setMagnets((prev) => {
+            let cx = 0;
+            let cy = 0;
+            let rowHeight = 0;
+
+            return prev.map((m, i) => {
+                const el = magnetTiles[i];
+                const w = el?.offsetWidth ?? 0;
+                const h = el?.offsetHeight ?? 0;
+                const moved = resetAll ? false : m.moved;
+
+                if (moved) {
+                    return { ...m, x: clamp(m.x, cw - w), y: clamp(m.y, ch - h) };
+                }
+
+                if (cx > 0 && cx + w > groupWidth) {
+                    cx = 0;
+                    cy += rowHeight + gapY;
+                    rowHeight = 0;
+                }
+
+                const x = offsetX + cx;
+                const y = offsetY + cy;
+                cx += w + gapX;
+                rowHeight = Math.max(rowHeight, h);
+                return { ...m, x, y, moved, z: resetAll ? 1 : m.z };
+            });
+        });
     }, []);
 
-    const clampIntoView = useCallback(() => {
-        const container = containerRef.current;
-        if (!container) return;
-
-        const magnetTiles = Array.from(container.children) as HTMLElement[];
-        const cw = container.clientWidth;
-        const ch = container.clientHeight;
-
-        setMagnets((prev) =>
-            prev.map((m, i) => ({
-                ...m,
-                x: clamp(m.x, cw - (magnetTiles[i]?.offsetWidth ?? 0)),
-                y: clamp(m.y, ch - (magnetTiles[i]?.offsetHeight ?? 0)),
-            })),
-        );
-    }, []);
+    useImperativeHandle(
+        ref,
+        () => ({
+            reset() {
+                zCounter.current = 1;
+                reflow(true);
+            },
+        }),
+        [reflow],
+    );
 
     useLayoutEffect(() => {
-        layout();
-    }, [layout]);
+        reflow();
+    }, [reflow]);
 
     useEffect(() => {
         let frame = 0;
 
         function onResize() {
             cancelAnimationFrame(frame);
-            frame = requestAnimationFrame(() => {
-                if (interactedRef.current) clampIntoView();
-                else layout();
-            });
+            frame = requestAnimationFrame(() => reflow());
         }
         window.addEventListener("resize", onResize);
         return () => {
             cancelAnimationFrame(frame);
             window.removeEventListener("resize", onResize);
         };
-    }, [layout, clampIntoView]);
+    }, [reflow]);
 
     function onPointerDown(e: React.PointerEvent<HTMLDivElement>, id: number) {
         const tile = e.currentTarget;
@@ -116,7 +124,7 @@ export default function TreehouseMagnets() {
         const box = container.getBoundingClientRect();
         const x = e.clientX - box.left - drag.dx;
         const y = e.clientY - box.top - drag.dy;
-        setMagnets((prev) => prev.map((m) => (m.id === drag.id ? { ...m, x, y } : m)));
+        setMagnets((prev) => prev.map((m) => (m.id === drag.id ? { ...m, x, y, moved: true } : m)));
     }
 
     function onPointerUp(e: React.PointerEvent<HTMLDivElement>) {
