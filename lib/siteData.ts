@@ -26,7 +26,7 @@ export const sites: Site[] = [
             },
         ],
         publishDate: "2026-06-21",
-        thumbnail: "/images/rectangle.png",
+        thumbnail: "/images/thumbnails/alex-g-treehouse.png",
     },
     {
         songTitle: "Bounce",

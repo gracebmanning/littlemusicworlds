@@ -22,7 +22,7 @@ const treehouse_lyrics = [
     "of",
     "my",
     "treehouse",
-    "its",
+    "it's",
     "where",
     "i",
     "sit",
@@ -49,7 +49,24 @@ const treehouse_lyrics = [
     "leave",
 ];
 
-const mechanics = ["a", "to", "in", "with", "for", "as", "at", "from", "they", "our", "ing", "ly"];
+const mechanics = [
+    "a",
+    "to",
+    "in",
+    "with",
+    "for",
+    "as",
+    "at",
+    "from",
+    "they",
+    "our",
+    "ing",
+    "ly",
+    "the",
+    "my",
+    "me",
+    "am",
+];
 
 const addtl_words = ["quiet", "loud", "together", "friend"];
 

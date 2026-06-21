@@ -15,7 +15,7 @@ function TreehouseContent() {
     return (
         <main className="relative w-full h-full min-h-screen flex flex-col justify-center items-center bg-[url('/images/field_of_grass.jpg')] bg-cover">
             <div className="w-full px-1 py-0.5 flex flex-row justify-between items-center">
-                <Link href="/" className="underline px-0.5 py-px">
+                <Link href="/" className="underline bg-background/30 px-0.5 py-px">
                     ← go home
                 </Link>
                 <button
@@ -46,6 +46,11 @@ function TreehouseContent() {
                         className="absolute left-[32%] bottom-[82%] h-auto w-[36%]"
                     />
                 </div>
+                <div className="absolute bottom-5 left-5">
+                    <button className="hover:cursor-pointer underline bg-background/30 px-1">
+                        image sources
+                    </button>
+                </div>
                 <TreehouseMagnets ref={magnetsRef} />
             </div>
         </main>
@@ -59,8 +64,3 @@ export default function AlexGTreehouse({ site }: { site: Site }) {
         </WorldGate>
     );
 }
-
-// desk: https://publicdomainvectors.org/en/free-clipart/Office-desk-vector-illustration/11004.html
-// computer - original site: https://web.archive.org/web/20011230035715/http://br.geocities.com:80/adrianocaramello/computador01.gif
-// computer - solo: https://blob.gifcities.org/gifcities/4CYYPJFEYJMKKXSJKSU3IDWNCTE7FTTR.gif
-// field: https://commons.wikimedia.org/wiki/File:Field_of_grass_-_geograph.org.uk_-_436971.jpg
