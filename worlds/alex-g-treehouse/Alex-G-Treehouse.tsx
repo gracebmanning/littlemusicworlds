@@ -1,15 +1,18 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import WorldGate, { useWorldEntered } from "@/components/WorldGate";
 import { Site } from "@/lib/siteData";
 import { TreehouseEmbed } from "./TreehouseEmbed";
 import Image from "next/image";
 import Link from "next/link";
 import TreehouseMagnets, { type MagnetsHandle } from "./TreehouseMagnets";
+import { Alex_G_Treehouse_assets } from "@/lib/assets";
+import SourceModal from "@/components/SourceModal";
 
 function TreehouseContent() {
     const entered = useWorldEntered();
     const magnetsRef = useRef<MagnetsHandle>(null);
+    const [sourcesOpen, setSourcesOpen] = useState(false);
     if (!entered) return null;
 
     return (
@@ -19,6 +22,7 @@ function TreehouseContent() {
                     ← go home
                 </Link>
                 <button
+                    type="button"
                     onClick={() => magnetsRef.current?.reset()}
                     className="underline px-0.5 py-px text-accent-one bg-accent-two hover:cursor-pointer"
                 >
@@ -31,28 +35,35 @@ function TreehouseContent() {
                 </div>
                 <div className="absolute left-[2%] md:left-[8%] top-[68%] md:top-[60%] lg:top-[52%] z-0 w-[73vw] md:w-[65vw] max-w-130">
                     <Image
-                        src="/images/desk.svg"
-                        alt=""
-                        width={500}
-                        height={290}
+                        {...Alex_G_Treehouse_assets.desk.img}
+                        alt={Alex_G_Treehouse_assets.desk.img.alt}
+                        loading="eager"
                         className="h-auto w-full"
                     />
                     <Image
-                        src="/images/computer.gif"
-                        alt=""
-                        width={180}
-                        height={126}
+                        {...Alex_G_Treehouse_assets.computerGif.img}
+                        alt={Alex_G_Treehouse_assets.computerGif.img.alt}
                         unoptimized
                         className="absolute left-[32%] bottom-[82%] h-auto w-[36%]"
                     />
                 </div>
                 <div className="absolute bottom-5 left-5">
-                    <button className="hover:cursor-pointer underline bg-background/30 px-1">
+                    <button
+                        type="button"
+                        onClick={() => setSourcesOpen(true)}
+                        className="hover:cursor-pointer underline bg-background/30 px-1"
+                    >
                         image sources
                     </button>
                 </div>
                 <TreehouseMagnets ref={magnetsRef} />
             </div>
+            {sourcesOpen && (
+                <SourceModal
+                    assets={Alex_G_Treehouse_assets}
+                    onClose={() => setSourcesOpen(false)}
+                />
+            )}
         </main>
     );
 }
