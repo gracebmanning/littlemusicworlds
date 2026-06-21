@@ -36,7 +36,7 @@ export default function Grid({ sites }: { sites: Site[] }) {
                 <GridSearch searchQuery={searchQuery} onSearchChange={setSearchQuery} />
                 <GridSort sortOrder={sortOrder} onSortChange={setSortOrder} />
             </div>
-            <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8 md:gap-x-12 lg:gap-x-20">
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8 md:gap-x-12 lg:gap-x-20">
                 {filteredSites.length > 0 ? (
                     filteredSites.map((site, index) => (
                         <Link

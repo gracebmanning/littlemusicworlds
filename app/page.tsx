@@ -5,7 +5,7 @@ export default function Home() {
     return (
         <div className="flex flex-col flex-1 items-center justify-start px-8 md:px-10 lg:px-20 py-20">
             <div className="flex flex-col justify-center items-center gap-6 mb-10">
-                <h1 className="text-4xl">littlemusicworlds.net</h1>
+                <h1 className="text-3xl md:text-4xl">littlemusicworlds.net</h1>
                 <h2 className="text-base flex flex-col md:flex-row justify-center items-center gap-x-4 gap-y-2">
                     <a
                         href="https://graceis.online/"
