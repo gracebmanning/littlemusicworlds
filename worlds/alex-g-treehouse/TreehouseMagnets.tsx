@@ -147,7 +147,7 @@ export default function TreehouseMagnets({ ref }: { ref?: React.Ref<MagnetsHandl
                         zIndex: m.z,
                         touchAction: "none",
                     }}
-                    className="pointer-events-auto absolute top-0 left-0 w-fit bg-white text-black px-2 py-0.5 font-['Times_New_Roman'] text-base cursor-grab active:cursor-grabbing shadow-md"
+                    className="pointer-events-auto absolute top-0 left-0 w-fit bg-white text-black text-sm md:[@media(min-height:600px)]:text-base px-2 py-0.5 font-['Times_New_Roman'] cursor-grab active:cursor-grabbing shadow-md"
                 >
                     {m.word}
                 </div>

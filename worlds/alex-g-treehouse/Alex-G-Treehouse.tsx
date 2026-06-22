@@ -16,7 +16,7 @@ function TreehouseContent() {
     if (!entered) return null;
 
     return (
-        <main className="relative w-full h-full min-h-screen flex flex-col justify-center items-center bg-[url('/images/field_of_grass.jpg')] bg-cover">
+        <main className="relative w-full h-dvh overflow-hidden flex flex-col justify-center items-center bg-[url('/images/field_of_grass.jpg')] bg-cover">
             <div className="w-full px-1 py-0.5 flex flex-row justify-between items-center">
                 <Link href="/" className="underline bg-background/30 px-0.5 py-px">
                     ← go home
@@ -33,7 +33,7 @@ function TreehouseContent() {
                 <div className="absolute bottom-5 right-5">
                     <TreehouseEmbed />
                 </div>
-                <div className="absolute left-[2%] md:left-[8%] top-[68%] md:top-[60%] lg:top-[52%] z-0 w-[73vw] md:w-[65vw] max-w-130">
+                <div className="absolute left-[2%] md:left-[8%] top-[68%] md:top-[60%] lg:top-[52%] z-0 w-[min(73vw,80dvh)] md:w-[min(65vw,80dvh)] max-w-130">
                     <Image
                         {...Alex_G_Treehouse_assets.desk.img}
                         alt={Alex_G_Treehouse_assets.desk.img.alt}
