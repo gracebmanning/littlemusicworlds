@@ -5,4 +5,7 @@ import type { Site } from "@/lib/siteData";
 export const worlds: Record<string, ComponentType<{ site: Site }>> = {
     "alex-g/treehouse": dynamic(() => import("./alex-g-treehouse/Alex-G-Treehouse")),
     "tommy-fleece/bounce": dynamic(() => import("./tommy-fleece-bounce/Tommy-Fleece-Bounce")),
+    "loukeman/pink-bape-lighter": dynamic(
+        () => import("./loukeman-pink-bape-lighter/Loukeman-Pink-Bape-Lighter"),
+    ),
 };

@@ -17,6 +17,18 @@ export const sitePath = (s: Site) => `/${s.artists[0].slug}/${s.songSlug}`;
 
 export const sites: Site[] = [
     {
+        songTitle: "Pink Bape Lighter",
+        songSlug: "pink-bape-lighter",
+        artists: [
+            {
+                name: "Loukeman",
+                slug: "loukeman",
+            },
+        ],
+        publishDate: "2026-07-10",
+        thumbnail: "/images/thumbnails/thumb_placeholder.png",
+    },
+    {
         songTitle: "Treehouse",
         songSlug: "treehouse",
         artists: [
