@@ -8,7 +8,7 @@ const SongEmbed = () => {
     return (
         <div className="fixed bottom-2 right-2 z-20 w-30 aspect-square overflow-hidden">
             <iframe
-                className="absolute top-0 left-1/2 -translate-x-1/2 h-full w-[178%]"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[101%] w-[179.6%]"
                 src="https://www.youtube.com/embed/ydGyN1fMuR8?si=RZxLi7B8d_Wzip0D&amp;autoplay=1&amp;controls=0"
                 title="YouTube video player"
                 frameBorder="0"

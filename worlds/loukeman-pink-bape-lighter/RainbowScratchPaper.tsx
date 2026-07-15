@@ -113,7 +113,7 @@ export default function RainbowScratchPaper() {
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
                 onPointerCancel={handlePointerUp}
-                className="absolute w-full h-full inset-0 z-10"
+                className="absolute w-full h-full inset-0 z-10 touch-none"
             ></canvas>
         </div>
     );

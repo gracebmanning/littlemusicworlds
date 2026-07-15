@@ -25,8 +25,8 @@ export const sites: Site[] = [
                 slug: "loukeman",
             },
         ],
-        publishDate: "2026-07-10",
-        thumbnail: "/images/thumbnails/thumb_placeholder.png",
+        publishDate: "2026-07-15",
+        thumbnail: "/images/thumbnails/loukeman-pink-bape-lighter.png",
     },
     {
         songTitle: "Treehouse",
