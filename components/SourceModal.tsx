@@ -1,9 +1,33 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import type { ImageAsset } from "@/lib/assets";
+import type { ImageAsset, Origin } from "@/lib/assets";
 import Image from "next/image";
 import { newTab_foreground } from "@/lib/icons";
+
+const CreditLine = ({ origin }: { origin: Origin }) => (
+    <>
+        <a
+            href={origin.href}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1 underline"
+        >
+            {origin.title}
+            {newTab_foreground}
+        </a>
+        {origin.author && <> by {origin.author}</>}
+        {", "}
+        {origin.license.href ? (
+            <a href={origin.license.href} target="_blank" rel="noreferrer" className="underline">
+                {origin.license.name}
+            </a>
+        ) : (
+            <span>{origin.license.name}</span>
+        )}
+        {origin.modified && " (modified)"}
+    </>
+);
 
 const SourceModal = ({
     onClose,
@@ -38,7 +62,7 @@ const SourceModal = ({
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="source-modal-title"
-                className="max-h-[80vh] w-[90vw] max-w-md overflow-y-auto bg-background p-4"
+                className="max-h-[80vh] w-[90vw] max-w-lg overflow-y-auto bg-background p-4"
                 onClick={(e) => e.stopPropagation()}
             >
                 <div className="flex flex-row justify-between items-center">
@@ -55,25 +79,38 @@ const SourceModal = ({
                     </button>
                 </div>
                 <ul className="mt-3 flex flex-col gap-4">
-                    {Object.entries(assets).map(([key, asset]) => (
-                        <li key={key} className="flex flex-row justify-start items-center gap-2">
-                            <Image
-                                {...asset.img}
-                                alt={asset.img.alt}
-                                unoptimized
-                                className="w-15 h-auto"
-                            />
-                            <a
-                                href={asset.origin.href}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="flex flex-row justify-start items-center underline gap-1"
-                            >
-                                {asset.origin.title}
-                                {newTab_foreground}
-                            </a>
-                        </li>
-                    ))}
+                    {Object.entries(assets).map(([key, asset]) => {
+                        const origins = Array.isArray(asset.origin) ? asset.origin : [asset.origin];
+                        return (
+                            <li key={key} className="flex flex-row justify-start items-start gap-2">
+                                <Image
+                                    {...asset.img}
+                                    alt={asset.img.alt}
+                                    unoptimized
+                                    className="w-15 h-auto shrink-0"
+                                />
+                                {origins.length === 1 ? (
+                                    <p>
+                                        <CreditLine origin={origins[0]} />
+                                    </p>
+                                ) : (
+                                    <ul className="list-disc pl-4 flex flex-col gap-1">
+                                        {origins.map((o) => (
+                                            <li key={o.href}>
+                                                <CreditLine origin={o} />
+                                                {o.note && (
+                                                    <span className="opacity-70">
+                                                        {" — "}
+                                                        {o.note}
+                                                    </span>
+                                                )}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
         </div>
