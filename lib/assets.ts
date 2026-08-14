@@ -6,7 +6,11 @@ import fieldOfGrass from "@/public/images/field_of_grass.jpg";
 import blueSkyWithClouds from "@/public/images/blue_sky_with_clouds.jpg";
 import crackedPavement from "@/public/images/cracked_pavement.jpg";
 import pinkGlitter from "@/public/images/pink_glitter.gif";
+import rainbowGlitter from "@/public/images/rainbow_glitter.gif";
 import grassHill from "@/public/images/grass_hill.svg";
+import handDrawnSun from "@/public/images/hand_drawn_sun.png";
+import handDrawnBalloon from "@/public/images/hand_drawn_balloon.png";
+import handDrawnGirl from "@/public/images/hand_drawn_girl.png";
 
 type License = {
     name: string; // ex: "CC BY-SA 4.0", "CC0", "Public Domain", "Unknown / unverified"
@@ -74,7 +78,7 @@ export const Alex_G_Treehouse_assets = {
     },
 } satisfies Record<string, ImageAsset>;
 
-export const Dev_Lemon_Eat_The_Pavement_assets = {
+export const Dev_Lemons_Eat_The_Pavement_assets = {
     blueSkyWithClouds: {
         img: {
             src: blueSkyWithClouds,
@@ -147,6 +151,66 @@ export const Dev_Lemon_Eat_The_Pavement_assets = {
                 name: "Unknown / unverified",
             },
             note: "Found via GifCities; archived by the Internet Archive. Original copyright status unclear.",
+        },
+    },
+    rainbowGlitter: {
+        img: {
+            src: rainbowGlitter,
+            alt: "",
+        },
+        origin: {
+            title: "Animated glitter gif (archived GeoCities page, c. 2009)",
+            href: "https://web.archive.org/web/20091025071851/http://geocities.com/smhart33/GLITTERS3.html",
+            author: "Unknown",
+            license: {
+                name: "Unknown / unverified",
+            },
+            note: "Found via GifCities; archived by the Internet Archive. Original copyright status unclear.",
+        },
+    },
+    handDrawnSun: {
+        img: {
+            src: handDrawnSun,
+            alt: "",
+        },
+        origin: {
+            title: "Hand drawn sun",
+            href: "",
+            author: "Me",
+            license: {
+                name: "",
+            },
+            note: "drawn",
+        },
+    },
+    handDrawnBalloon: {
+        img: {
+            src: handDrawnBalloon,
+            alt: "",
+        },
+        origin: {
+            title: "Hand drawn sun",
+            href: "",
+            author: "Me",
+            license: {
+                name: "",
+            },
+            note: "drawn",
+        },
+    },
+    handDrawnGirl: {
+        img: {
+            src: handDrawnGirl,
+            alt: "",
+        },
+        origin: {
+            title: "Hand drawn sun",
+            href: "",
+            author: "Me",
+            license: {
+                name: "",
+            },
+            note: "drawn",
         },
     },
 } satisfies Record<string, ImageAsset>;
