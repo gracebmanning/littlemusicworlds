@@ -8,4 +8,7 @@ export const worlds: Record<string, ComponentType<{ site: Site }>> = {
     "loukeman/pink-bape-lighter": dynamic(
         () => import("./loukeman-pink-bape-lighter/Loukeman-Pink-Bape-Lighter"),
     ),
+    "dev-lemons/eat-the-pavement": dynamic(
+        () => import("./dev-lemons-eat-the-pavement/Dev-Lemons-Eat-the-Pavement"),
+    ),
 };

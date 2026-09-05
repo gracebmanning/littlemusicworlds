@@ -32,7 +32,7 @@ function PinkBapeLighterContent() {
     );
 }
 
-export default function TommyFleeceBounce({ site }: { site: Site }) {
+export default function LoukemanPinkBapeLighter({ site }: { site: Site }) {
     return (
         <WorldGate contentWarning={site.contentWarning}>
             <PinkBapeLighterContent />
