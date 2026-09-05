@@ -1,4 +1,11 @@
-import { useRef, useEffect, useImperativeHandle, forwardRef, type MouseEvent } from "react";
+import {
+    useRef,
+    useEffect,
+    useState,
+    useImperativeHandle,
+    forwardRef,
+    type MouseEvent,
+} from "react";
 import Image from "next/image";
 import { Dev_Lemons_Eat_The_Pavement_assets } from "@/lib/assets";
 import { Shrikhand } from "next/font/google";
@@ -27,6 +34,7 @@ const InteractivePavement = forwardRef<InteractivePavementHandle>(
         const imgRef = useRef<HTMLImageElement | null>(null);
         const buildRef = useRef({ width: 0, height: 0 });
         const paintedRef = useRef(false);
+        const [ready, setReady] = useState(false);
 
         const drawPavement = () => {
             const canvas = canvasRef.current;
@@ -73,6 +81,7 @@ const InteractivePavement = forwardRef<InteractivePavementHandle>(
                 paintedRef.current = true;
 
                 drawPavement();
+                setReady(true);
             };
 
             pavement.onload = setup;
@@ -141,6 +150,12 @@ const InteractivePavement = forwardRef<InteractivePavementHandle>(
                     onClick={takeBite}
                     className="absolute z-20 inset-0 w-full h-full hover:cursor-[url('/images/mouth-open_64.png')_32_32,auto] active:cursor-[url('/images/mouth-closed_64.png')_32_32,auto]"
                 ></canvas>
+                {!ready && (
+                    <div
+                        className="absolute z-15 inset-0 w-full h-full bg-neutral-400"
+                        aria-hidden="true"
+                    />
+                )}
                 <div
                     className="absolute z-10 inset-0 w-full h-full flex flex-col justify-center items-center"
                     style={{
