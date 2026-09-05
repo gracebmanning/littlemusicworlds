@@ -139,7 +139,7 @@ const InteractivePavement = forwardRef<InteractivePavementHandle>(
                 <canvas
                     ref={canvasRef}
                     onClick={takeBite}
-                    className="absolute z-20 inset-0 w-full h-full"
+                    className="absolute z-20 inset-0 w-full h-full hover:cursor-[url('/images/mouth-open_64.png')_32_32,auto] active:cursor-[url('/images/mouth-closed_64.png')_32_32,auto]"
                 ></canvas>
                 <div
                     className="absolute z-10 inset-0 w-full h-full flex flex-col justify-center items-center"

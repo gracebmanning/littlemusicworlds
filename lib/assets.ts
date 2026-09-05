@@ -3,6 +3,8 @@ import type { StaticImageData } from "next/image";
 import computerGif from "@/public/images/computer.gif";
 import desk from "@/public/images/desk.svg";
 import fieldOfGrass from "@/public/images/field_of_grass.jpg";
+import mouthOpen from "@/public/images/mouth-open_64.png";
+import mouthClosed from "@/public/images/mouth-closed_64.png";
 import blueSkyWithClouds from "@/public/images/blue_sky_with_clouds.jpg";
 import crackedPavement from "@/public/images/cracked_pavement.jpg";
 import rainbowGlitter from "@/public/images/rainbow_glitter.gif";
@@ -78,6 +80,32 @@ export const Alex_G_Treehouse_assets = {
 } satisfies Record<string, ImageAsset>;
 
 export const Dev_Lemons_Eat_The_Pavement_assets = {
+    mouthOpen: {
+        img: {
+            src: mouthOpen,
+            alt: "A digitally-rendered set of dentures with pink gums and white teeth, upper and lower rows separated to form an open mouth.",
+        },
+        origin: {
+            title: "Open teeth transparent backgroung PNG clipart",
+            href: "https://www.hiclipart.com/free-transparent-background-png-clipart-idzvr",
+            license: {
+                name: "Unknown",
+            },
+        },
+    },
+    mouthClosed: {
+        img: {
+            src: mouthClosed,
+            alt: "A photo of a set of dentures with pink gums and white teeth, upper and lower rows closed together in a full bite.",
+        },
+        origin: {
+            title: "Closed False Teeth transparent PNG",
+            href: "https://www.stickpng.com/img/objects/false-teeth/closed-false-teeth",
+            license: {
+                name: "Non-Commercial Use",
+            },
+        },
+    },
     blueSkyWithClouds: {
         img: {
             src: blueSkyWithClouds,
