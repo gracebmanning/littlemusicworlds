@@ -9,11 +9,12 @@ const shrikhand = Shrikhand({
     style: "normal",
 });
 
-const BITE_RADIUS = 50;
+const BITE_RADIUS_DESKTOP = 80;
+const BITE_RADIUS_MOBILE = 50;
 const TOOTH_COUNT = 8;
-const TOOTH_RING = 0.55;
-const TOOTH_RADIUS_MIN = 0.5;
-const TOOTH_RADIUS_MAX = 0.62;
+const TOOTH_POS = 0.55;
+const TOOTH_RADIUS_MIN = 0.5; // fraction of BITE_RADIUS
+const TOOTH_RADIUS_MAX = 0.65; // fraction of BITE_RADIUS
 const TOOTH_ANGLE_JITTER = 0.5;
 
 export type InteractivePavementHandle = {
@@ -107,20 +108,26 @@ const InteractivePavement = forwardRef<InteractivePavementHandle>(
             context.save();
             context.globalCompositeOperation = "destination-out";
 
+            const biteRadius = window.matchMedia("(min-width: 768px)").matches
+                ? BITE_RADIUS_DESKTOP
+                : BITE_RADIUS_MOBILE;
+
             context.beginPath();
-            context.arc(x, y, BITE_RADIUS * TOOTH_RING, 0, Math.PI * 2);
+            context.arc(x, y, biteRadius * TOOTH_POS, 0, 2 * Math.PI);
             context.fill();
 
-            const step = (Math.PI * 2) / TOOTH_COUNT;
+            const step = (2 * Math.PI) / TOOTH_COUNT;
             for (let i = 0; i < TOOTH_COUNT; i++) {
                 const angle = i * step + (Math.random() - 0.5) * step * TOOTH_ANGLE_JITTER;
-                const lobeRadius =
-                    BITE_RADIUS *
-                    (TOOTH_RADIUS_MIN + Math.random() * (TOOTH_RADIUS_MAX - TOOTH_RADIUS_MIN));
-                const cx = x + Math.cos(angle) * BITE_RADIUS * TOOTH_RING;
-                const cy = y + Math.sin(angle) * BITE_RADIUS * TOOTH_RING;
+                const toothX = x + Math.cos(angle) * TOOTH_POS * biteRadius;
+                const toothY = y + Math.sin(angle) * TOOTH_POS * biteRadius;
+
+                const toothRadius =
+                    biteRadius *
+                    (Math.random() * (TOOTH_RADIUS_MAX - TOOTH_RADIUS_MIN) + TOOTH_RADIUS_MIN);
+
                 context.beginPath();
-                context.arc(cx, cy, lobeRadius, 0, Math.PI * 2);
+                context.arc(toothX, toothY, toothRadius, 0, 2 * Math.PI);
                 context.fill();
             }
 
