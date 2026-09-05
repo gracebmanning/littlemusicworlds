@@ -25,8 +25,8 @@ export const sites: Site[] = [
                 slug: "dev-lemons",
             },
         ],
-        publishDate: "2026-08-02",
-        thumbnail: "/images/thumbnails/thumb_placeholder.png",
+        publishDate: "2026-09-05",
+        thumbnail: "/images/thumbnails/dev-lemons-eat-the-pavement.png",
     },
     {
         songTitle: "Pink Bape Lighter",
