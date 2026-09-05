@@ -33,7 +33,7 @@ function EatThePavementContent() {
     const [sourcesOpen, setSourcesOpen] = useState(false);
 
     return (
-        <main className="relative w-full h-dvh flex flex-col justify-center items-center bg-white">
+        <main className="relative w-full h-dvh flex flex-col justify-center items-center bg-[#b1cdff]">
             <div className="w-full flex flex-col justify-center items-center gap-y-2 px-2 py-2">
                 <div className="w-full flex flex-row flex-wrap justify-between items-center px-2">
                     <Link href="/" className={buttonStyle}>
@@ -43,7 +43,9 @@ function EatThePavementContent() {
                         {<ArrowClockwiseIcon />} reset
                     </button>
                 </div>
-                <p className="w-full text-black text-center">TAP TO EAT THE PAVEMENT</p>
+                <p className="w-full text-accent-one font-bold text-center">
+                    TAP TO EAT THE PAVEMENT
+                </p>
             </div>
             <InteractivePavement ref={pavementRef} />
             <div className="w-full py-2 flex flex-col justify-center items-center gap-y-4">

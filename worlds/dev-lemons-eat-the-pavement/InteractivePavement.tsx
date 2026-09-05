@@ -135,7 +135,7 @@ const InteractivePavement = forwardRef<InteractivePavementHandle>(
         }
 
         return (
-            <div className="relative w-[95dvw] md:w-[80dvw] h-full border border-red-600">
+            <div className="relative w-[95dvw] md:w-[80dvw] h-full border border-accent-one">
                 <canvas
                     ref={canvasRef}
                     onClick={takeBite}
