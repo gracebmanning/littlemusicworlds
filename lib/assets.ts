@@ -5,7 +5,6 @@ import desk from "@/public/images/desk.svg";
 import fieldOfGrass from "@/public/images/field_of_grass.jpg";
 import blueSkyWithClouds from "@/public/images/blue_sky_with_clouds.jpg";
 import crackedPavement from "@/public/images/cracked_pavement.jpg";
-import pinkGlitter from "@/public/images/pink_glitter.gif";
 import rainbowGlitter from "@/public/images/rainbow_glitter.gif";
 import grassHill from "@/public/images/grass_hill.svg";
 import handDrawnSun from "@/public/images/hand_drawn_sun.png";
@@ -19,7 +18,7 @@ type License = {
 
 export type Origin = {
     title: string;
-    href: string; // link to file's source page
+    href?: string; // link to file's source page; omit for my own work
     author?: string; // actual creator
     license: License; // required for CC-licensed files
     modified?: boolean; // set true if source was altered
@@ -82,7 +81,7 @@ export const Dev_Lemons_Eat_The_Pavement_assets = {
     blueSkyWithClouds: {
         img: {
             src: blueSkyWithClouds,
-            alt: "",
+            alt: "Baby blue sky with several overlapping soft white clouds.",
         },
         origin: {
             title: "Clouds and blue sky in Russia",
@@ -97,7 +96,7 @@ export const Dev_Lemons_Eat_The_Pavement_assets = {
     crackedPavement: {
         img: {
             src: crackedPavement,
-            alt: "",
+            alt: "Photograph of tiled pavement that is severely cracked across it. There is also a wet mark on the pavement that indicates someone recently dropped their drink.",
         },
         origin: {
             title: "Severely cracked paving in Stuttgart, Germany (November 2012)",
@@ -138,25 +137,10 @@ export const Dev_Lemons_Eat_The_Pavement_assets = {
             },
         ],
     },
-    pinkGlitter: {
-        img: {
-            src: pinkGlitter,
-            alt: "",
-        },
-        origin: {
-            title: "Animated glitter gif (archived GeoCities page, c. 2009)",
-            href: "https://web.archive.org/web/20091027050726/http://hk.geocities.com/ekiyo12cube/70ukw4.gif",
-            author: "Unknown",
-            license: {
-                name: "Unknown / unverified",
-            },
-            note: "Found via GifCities; archived by the Internet Archive. Original copyright status unclear.",
-        },
-    },
     rainbowGlitter: {
         img: {
             src: rainbowGlitter,
-            alt: "",
+            alt: "A gif with a rainbow gradient background and animated glitter on top.",
         },
         origin: {
             title: "Animated glitter gif (archived GeoCities page, c. 2009)",
@@ -171,14 +155,13 @@ export const Dev_Lemons_Eat_The_Pavement_assets = {
     handDrawnSun: {
         img: {
             src: handDrawnSun,
-            alt: "",
+            alt: "A yellow cartoon-style sun, drawn using colored pencils.",
         },
         origin: {
             title: "Hand drawn sun",
-            href: "",
-            author: "Me",
+            author: "Grace Manning",
             license: {
-                name: "",
+                name: "© Grace Manning",
             },
             note: "drawn",
         },
@@ -186,14 +169,13 @@ export const Dev_Lemons_Eat_The_Pavement_assets = {
     handDrawnBalloon: {
         img: {
             src: handDrawnBalloon,
-            alt: "",
+            alt: "A red balloon with a brown string, drawn using colored pencils.",
         },
         origin: {
-            title: "Hand drawn sun",
-            href: "",
-            author: "Me",
+            title: "Hand drawn balloon",
+            author: "Grace Manning",
             license: {
-                name: "",
+                name: "© Grace Manning",
             },
             note: "drawn",
         },
@@ -201,14 +183,13 @@ export const Dev_Lemons_Eat_The_Pavement_assets = {
     handDrawnGirl: {
         img: {
             src: handDrawnGirl,
-            alt: "",
+            alt: "A stick figure girl with blonde hair and a pink triangular dress, with a simple smiley face. Hand drawn using colored pencils.",
         },
         origin: {
-            title: "Hand drawn sun",
-            href: "",
-            author: "Me",
+            title: "Hand drawn girl",
+            author: "Grace Manning",
             license: {
-                name: "",
+                name: "© Grace Manning",
             },
             note: "drawn",
         },

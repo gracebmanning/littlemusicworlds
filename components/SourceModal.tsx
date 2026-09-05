@@ -7,23 +7,41 @@ import { newTab_foreground } from "@/lib/icons";
 
 const CreditLine = ({ origin }: { origin: Origin }) => (
     <>
-        <a
-            href={origin.href}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1 underline"
-        >
-            {origin.title}
-            {newTab_foreground}
-        </a>
-        {origin.author && <> by {origin.author}</>}
-        {", "}
-        {origin.license.href ? (
-            <a href={origin.license.href} target="_blank" rel="noreferrer" className="underline">
-                {origin.license.name}
+        <span>{origin.title}</span>
+        {origin.href && (
+            <a
+                href={origin.href}
+                target="_blank"
+                rel="noreferrer"
+                className="flex flex-row items-center gap-1 underline"
+            >
+                view source
+                {newTab_foreground}
             </a>
-        ) : (
-            <span>{origin.license.name}</span>
+        )}
+        {origin.author && (
+            <>
+                {" "}
+                by {origin.author}
+                {", "}
+            </>
+        )}
+        {origin.license.name && (
+            <>
+                {origin.license.href ? (
+                    <a
+                        href={origin.license.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex flex-row items-center gap-1 underline"
+                    >
+                        {origin.license.name}
+                        {newTab_foreground}
+                    </a>
+                ) : (
+                    <span>{origin.license.name}</span>
+                )}
+            </>
         )}
         {origin.modified && " (modified)"}
     </>
@@ -78,7 +96,7 @@ const SourceModal = ({
                         close
                     </button>
                 </div>
-                <ul className="mt-3 flex flex-col gap-4">
+                <ul className="mt-3 flex flex-col gap-6">
                     {Object.entries(assets).map(([key, asset]) => {
                         const origins = Array.isArray(asset.origin) ? asset.origin : [asset.origin];
                         return (
@@ -95,13 +113,13 @@ const SourceModal = ({
                                     </p>
                                 ) : (
                                     <ul className="list-disc pl-4 flex flex-col gap-1">
-                                        {origins.map((o) => (
-                                            <li key={o.href}>
-                                                <CreditLine origin={o} />
-                                                {o.note && (
+                                        {origins.map((origin, index) => (
+                                            <li key={index}>
+                                                <CreditLine origin={origin} />
+                                                {origin.note && (
                                                     <span className="opacity-70">
                                                         {" — "}
-                                                        {o.note}
+                                                        {origin.note}
                                                     </span>
                                                 )}
                                             </li>
