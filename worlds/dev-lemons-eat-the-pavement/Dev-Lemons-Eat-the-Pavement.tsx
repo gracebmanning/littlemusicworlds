@@ -6,6 +6,23 @@ import { Site } from "@/lib/siteData";
 import InteractivePavement, { type InteractivePavementHandle } from "./InteractivePavement";
 import { ArrowClockwiseIcon } from "@phosphor-icons/react";
 
+const VideoEmbed = () => {
+    // aspect ratio: width = 560, height = 315
+    return (
+        <div className="w-3xs aspect-video">
+            <iframe
+                className="w-full h-auto aspect-video"
+                src="https://www.youtube.com/embed/8uBcrVpLX7Q?si=zau96OtwDiYQxPqF"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+            ></iframe>
+        </div>
+    );
+};
+
 function EatThePavementContent() {
     const pavementRef = useRef<InteractivePavementHandle>(null);
 
@@ -26,9 +43,9 @@ function EatThePavementContent() {
                 <p className="w-full text-black text-center">TAP TO EAT THE PAVEMENT</p>
             </div>
             <InteractivePavement ref={pavementRef} />
-            <div className="w-full py-4 flex flex-col md:flex-row justify-evenly items-center">
+            <div className="w-full py-4 flex flex-col justify-center items-center gap-y-4">
+                <VideoEmbed />
                 <p className="text-black">image sources</p>
-                <p className="text-black">[VIDEO EMBED]</p>
             </div>
         </main>
     );
