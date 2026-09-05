@@ -128,7 +128,7 @@ const InteractivePavement = forwardRef<InteractivePavementHandle>(
         }
 
         return (
-            <div className="relative w-[80dvw] h-full border border-red-600">
+            <div className="relative w-[95dvw] md:w-[80dvw] h-full border border-red-600">
                 <canvas
                     ref={canvasRef}
                     onClick={takeBite}
@@ -150,20 +150,20 @@ const InteractivePavement = forwardRef<InteractivePavementHandle>(
                     <Image
                         src={Dev_Lemons_Eat_The_Pavement_assets.handDrawnSun.img.src}
                         alt={Dev_Lemons_Eat_The_Pavement_assets.handDrawnSun.img.alt}
-                        className="absolute top-5 right-5 w-70"
+                        className="absolute top-5 right-5 w-30 md:w-60"
                     />
                     <Image
                         src={Dev_Lemons_Eat_The_Pavement_assets.handDrawnBalloon.img.src}
                         alt={Dev_Lemons_Eat_The_Pavement_assets.handDrawnBalloon.img.alt}
-                        className="absolute bottom-15 left-0 w-auto h-120"
+                        className="absolute bottom-[20%] left-[5%] w-auto h-70 md:h-90"
                     />
                     <Image
                         src={Dev_Lemons_Eat_The_Pavement_assets.handDrawnGirl.img.src}
                         alt={Dev_Lemons_Eat_The_Pavement_assets.handDrawnGirl.img.alt}
-                        className="absolute bottom-0 left-20"
+                        className="absolute bottom-1 left-[7%] w-auto h-80 md:h-110"
                     />
                     <p
-                        className={`text-center text-transparent text-6xl stroke-1 stroke-black max-w-xl ${shrikhand.className}`}
+                        className={`absolute top-[22%] text-center text-transparent text-4xl md:text-5xl lg:text-6xl drop-shadow-lg max-w-lg ${shrikhand.className}`}
                         style={{
                             backgroundImage: "url('/images/rainbow_glitter.gif')",
                             backgroundRepeat: "repeat",
